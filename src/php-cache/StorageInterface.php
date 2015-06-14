@@ -29,4 +29,11 @@ interface StorageInterface
      */
 
     public function has($key);
+
+    /**
+     * @param $key
+     * @return bool
+     */
+
+    public function delete($key);
 }

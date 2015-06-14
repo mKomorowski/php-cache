@@ -61,10 +61,27 @@ class StorageFile implements StorageInterface
 
         if($this->checkIfExpired($storageClass->expire_at)){
 
+            $this->delete($key);
+
             return null;
         }
 
         return $storageClass->value;
+    }
+
+    /**
+     * Delete file
+     * @param $key
+     * @return bool
+     */
+
+    public function delete($key)
+    {
+        $filePath = $this->createFilePath($key);
+
+        if(!is_file($this->cacheDir.'/'.$filePath) || !is_writable($this->cacheDir.'/'.$filePath)) return false;
+
+        return unlink($this->cacheDir.'/'.$filePath);
     }
 
     /**

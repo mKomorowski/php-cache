@@ -82,4 +82,19 @@ class StorageFileTest extends PHPUnit_Framework_TestCase
 
         $this->assertFalse($this->storageFile->has('another_key'));
     }
+
+    /**
+     * Assert if properly set value can be deleted
+     */
+
+    public function testDelete()
+    {
+        $this->storageFile->set('key', 'value');
+
+        $this->assertEquals('value', $this->storageFile->get('key'));
+
+        $this->storageFile->delete('key', 'value');
+
+        $this->assertFalse($this->storageFile->has('key'));
+    }
 }
